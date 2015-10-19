@@ -30,6 +30,7 @@ form {
   position: absolute;
   width: 256px;
   z-index: -1;
+  margin-left:25px;
 }
 
 .randomPizzaContainer {
