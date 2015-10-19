@@ -283,12 +283,16 @@ function getNoun(y) {
   }
 }
 
-  var pizzaSizeLabel = document.getElementById('pizzaSize'),
-      randomPizzas = document.querySelectorAll(".randomPizzaContainer");
-
   // Updates pizza sizes
   function changePizzaSizes(size) {
-    var newWidth;
+    var newWidth,
+        pizzaSizeLabel,
+        randomPizzas;
+
+    // assign variables only if they haven't already been assigned; 
+    if (!pizzaSizeLabel) {pizzaSizeLabel = document.getElementById('pizzaSize');}
+    if (!randomPizzas) {randomPizzas = document.querySelectorAll(".randomPizzaContainer");}
+
     switch(size) {
       case "1":
         pizzaSizeLabel.innerHTML = "Small";
