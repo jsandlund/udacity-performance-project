@@ -33,7 +33,8 @@ TODO
   - do i really need to use a web worker? does this optimize speed?
 
 
-
 *After load*
   - On scroll: `updatePositions()`, which affects layout, is being called on scroll event. Horrible practice.
   - Resizing pizzas is innefficient
+    - use data attributes & classes to resize instead of of setting the style property
+    - kill Rx function; redundant & expensive. 

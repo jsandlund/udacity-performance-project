@@ -98,7 +98,9 @@ Pizza.prototype.buildHTML = function() {
     pizzaImage = document.createElement("img");
     pizzaDescriptionContainer = document.createElement("div");
     pizzaContainer.classList.add("randomPizzaContainer");
-    pizzaContainer.style.width = "33.33%";
+    // set default data-size to medium
+    pizzaContainer.setAttribute('data-size', 'medium');
+
     pizzaContainer.style.height = "325px";
     // pizzaContainer.id = "pizza" + i;                // gives each pizza element a unique id
     pizzaImageContainer.classList.add("col-md-6");
@@ -283,42 +285,42 @@ function getNoun(y) {
   }
 }
 
-  // Updates pizza sizes
-  function changePizzaSizes(size) {
-    var newWidth,
-        pizzaSizeLabel,
-        randomPizzas;
+// Updates pizza sizes
+function changePizzaSizes(size) {
+  var dataSize,
+      pizzaSizeLabel,
+      randomPizzas;
 
-    // assign variables only if they haven't already been assigned; 
-    if (!pizzaSizeLabel) {pizzaSizeLabel = document.getElementById('pizzaSize');}
-    if (!randomPizzas) {randomPizzas = document.querySelectorAll(".randomPizzaContainer");}
+  // assign variables only if they haven't already been assigned;
+  if (!pizzaSizeLabel) {pizzaSizeLabel = document.getElementById('pizzaSize');}
+  if (!randomPizzas) {randomPizzas = document.querySelectorAll(".randomPizzaContainer");}
 
-    switch(size) {
-      case "1":
-        pizzaSizeLabel.innerHTML = "Small";
-        newWidth = 25;
-        updatePizzasWidth();
-        return;
-      case "2":
-        pizzaSizeLabel.innerHTML = "Medium";
-        newWidth = 33.3;
-        updatePizzasWidth();
-        return;
-      case "3":
-        pizzaSizeLabel.innerHTML = "Large";
-        newWidth = 50;
-        updatePizzasWidth();
-        return;
-      default:
-        console.log("bug in sizeSwitcher");
-    }
+  switch(size) {
+    case "1":
+      pizzaSizeLabel.innerHTML = "Small";
+      dataSize = "small";
+      updatePizzasWidth();
+      return;
+    case "2":
+      pizzaSizeLabel.innerHTML = "Medium";
+      dataSize = "medium";
+      updatePizzasWidth();
+      return;
+    case "3":
+      pizzaSizeLabel.innerHTML = "Large";
+      dataSize = "large";
+      updatePizzasWidth();
+      return;
+    default:
+      console.log("bug in sizeSwitcher");
+  }
 
-    function updatePizzasWidth(){
-      for (var i = 0; i < randomPizzas.length; i++) {
-        randomPizzas[i].style.width = newWidth + '%';
-      }
+  function updatePizzasWidth(){
+    for (var i = 0; i < randomPizzas.length; i++) {
+      randomPizzas[i].dataset.size = dataSize;
     }
   }
+}
 
 function generateBGPizzas(){
 
@@ -365,10 +367,6 @@ function generateBGPizzas(){
 
     docFrag.appendChild(elem);
   }
-
-  // Write all elements to DOM at once using docFrag, to prevent multiple calls to DOM
+  // Write all elements to DOM at once using docFrag to prevent multiple calls to DOM
   pizzasContainer.appendChild(docFrag);
-
-  // moved updatePositions functionality within for loop of generatePizzas
-  // updatePositions();
 }
