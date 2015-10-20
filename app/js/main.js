@@ -104,7 +104,7 @@ Pizza.prototype.buildHTML = function() {
     pizzaContainer.style.height = "325px";
     // pizzaContainer.id = "pizza" + i;                // gives each pizza element a unique id
     pizzaImageContainer.classList.add("col-md-6");
-    pizzaImage.src = "images/pizza.png";
+    pizzaImage.src = "../images/pizza.png";
     pizzaImage.classList.add("img-responsive");
     pizzaImageContainer.appendChild(pizzaImage);
     pizzaContainer.appendChild(pizzaImageContainer);
@@ -357,7 +357,7 @@ function generateBGPizzas(){
 
     elem = document.createElement('img');
     elem.className = 'mover';
-    elem.src = "images/pizza.png";
+    elem.src = "../images/pizza.png";
 
     // if first column, set left attribute to to 0
     if (currentCol === 1) {
