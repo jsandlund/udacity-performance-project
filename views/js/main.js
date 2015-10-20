@@ -287,6 +287,9 @@ function getNoun(y) {
 
 // Updates pizza sizes
 function changePizzaSizes(size) {
+
+  window.performance.mark("mark_start_resize");   // User Timing API function
+
   var dataSize,
       pizzaSizeLabel,
       randomPizzas;
@@ -319,6 +322,12 @@ function changePizzaSizes(size) {
     for (var i = 0; i < randomPizzas.length; i++) {
       randomPizzas[i].dataset.size = dataSize;
     }
+
+    // User Timing API is awesome
+    window.performance.mark("mark_end_resize");
+    window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
+    var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
+    console.log("Time to resize pizzas: " + timeToResize[timeToResize.length - 1].duration + "ms");
   }
 }
 
