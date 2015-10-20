@@ -26,16 +26,10 @@ gulp.task('images', function(){
   .pipe(gulp.dest('dist/images'));
 });
 
-// Clone READme
-gulp.task('readme', function(){
-  return gulp.src('app/README.md')
-  .pipe(gulp.dest('dist/'));
-});
-
 gulp.task('clean', function() {
   del('dist');
 });
 
 gulp.task('build', function (callback) {
-  runSequence('clean', 'useref', 'images', 'readme', callback );
+  runSequence('clean', 'useref', 'images', callback );
 });
