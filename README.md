@@ -9,6 +9,22 @@ This project is part of Udacity's FrontEnd Nanodegree Program. It intends to eva
 
 Link to original, non-optimized site: https://github.com/udacity/frontend-nanodegree-mobile-portfolio
 
+## Getting Started
+
+This project requires installations of Node, NPM & Gulp.
+
+1. Clone this repo.
+```
+$ git clone git@github.com:jsandlund/udacity-performance-project.git
+```
+
+2. Install [node](http://nodejs.org), [npm](https://npmjs.org/), & [gulp](https://www.npmjs.com/package/gulp-install)
+
+3. Install required dependencies by running npm install
+```
+$ npm install --save
+```
+
 ## Change Log
 
 1. **index.html**
