@@ -17,7 +17,6 @@ This project requires installations of Node, NPM & Gulp.
 ```
 $ git clone git@github.com:jsandlund/udacity-performance-project.git
 ```
-
 2. Install [node](http://nodejs.org), [npm](https://npmjs.org/), & [gulp](https://www.npmjs.com/package/gulp-install)
 
 3. Install required dependencies by running npm install
@@ -38,13 +37,13 @@ $ npm install --save
     - refactored single JS file into multiple JS files to improve clarity
     - used document fragments to prevent DOM calls within for loops
   - on scroll changes:
-    - Moved all constant values & calculationats out of for loops in updateBGPizzas()
-    - Dynamically calculate number of background pizzas to build & animate based on window.innerHeight
+    - Moved all constant values out of for loops 
+    - Number of bg pizzas is now dynamically calculated using window.innerHeight; smaller device = fewer pizzas = less expensive
     - Instead of setting height & width of image, replaced with single re-sized pizza image
     - Used requestAnimationFrame to handle position updates
   - on pizza resize changes:
     - Use document fragments to prevent DOM thrashing: the script now creates all the html markup and accesses the DOM only once to append it, opposed to appending html for every new element.
-    - Used data attributes & classes to update the size of pizzas, opposed to updating the inline style properties of each pizza. This more declarative and performant.
+    - Used data attributes & classes to update the size of pizzas, opposed to updating the inline style properties of each pizza. This is more declarative and performant.
     - killed the rx function; it was redundant.
 3. **Global optimizations**
   - Used gulp to minify and concatenate JS, CSS & HTML files
