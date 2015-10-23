@@ -38,7 +38,10 @@ $ npm install --save
     - refactored single JS file into multiple JS files to improve clarity
     - used document fragments to prevent DOM calls within for loops
   - on scroll changes:
-    - Removed all on scroll event handlers. background pizza images are now static. The "moving effect" was distracting.
+    - Moved all constant values & calculationats out of for loops in updateBGPizzas()
+    - Dynamically calculate number of background pizzas to build & animate based on window.innerHeight
+    - Instead of setting height & width of image, replaced with single re-sized pizza image
+    - Used requestAnimationFrame to handle position updates
   - on pizza resize changes:
     - Use document fragments to prevent DOM thrashing: the script now creates all the html markup and accesses the DOM only once to append it, opposed to appending html for every new element.
     - Used data attributes & classes to update the size of pizzas, opposed to updating the inline style properties of each pizza. This more declarative and performant.

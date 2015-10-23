@@ -329,51 +329,57 @@ function changePizzaSizes(size) {
   }
 }
 
+// Moved static data outside for loop
+// Reduced number of pizzas being created from 200 to 31, which still fits the window size
+// Instead of setting height & width using JS, I re-sized the image used.
+// Used a document fragment to hold and then append elmements
 function generateBGPizzas(){
 
-  // remove calls to document object to prevent DOM thrashing.
   var elem,
       pizzasContainer = document.getElementById('movingPizzas1'),
       cols = 8,
-      rowNum = 0,
-      colNum = 0,
-      rowSpacePx = 200,
-      colSpacePx = 200,
-      posX = 0,
-      currentCol = 1,
+      s = 256,
+      rowHeightPx = 200,
+      rows = window.innerHeight / rowHeightPx,
+      pizzaLen = 7 * rows,
       docFrag = document.createDocumentFragment();
 
-  for (var i = 0; i < 200; i++) {
+  for (var i = 0; i < pizzaLen; i++) {
     // when i hits cols number, reset current column to 0
     // this prevents pizzas moving infinintely to the right
-    if ( (i  % cols) === 0 ) {
-      currentCol = 1;
-    }
-
-    // Set current row number
-    rowNum = Math.floor(i / cols);
 
     elem = document.createElement('img');
     elem.className = 'mover';
-    elem.src = "images/pizza.png";
-
-    // if first column, set left attribute to to 0
-    if (currentCol === 1) {
-      elem.style.left = 0 + "px";
-     } else {
-      elem.style.left = ( (currentCol - 1) * colSpacePx) + "px";
-    }
-
-    elem.style.top = (rowNum * rowSpacePx) + "px";
-    elem.style.height = "100px";
-    elem.style.width = "73.333px";
-    pizzasContainer.appendChild(elem);
-
-    // increment current column
-    currentCol++;
+    elem.basicLeft = (i % cols) * s;
+    elem.style.top = (Math.floor(i / cols) * s) + 'px';
+    elem.src = "images/pizza-resized.png";
 
     docFrag.appendChild(elem);
   }
   // Write all elements to DOM at once using docFrag to prevent multiple calls to DOM
   pizzasContainer.appendChild(docFrag);
+
+  // Make pizza elements available to updateBGPizzas function
+  window.items = document.getElementsByClassName('mover');
+
+  window.requestAnimationFrame(updateBGPizzas);
+}
+
+function updateBGPizzas(){
+
+  var pizzaNum = window.items.length,
+      scrollPos = (document.body.scrollTop / 1250),
+      phase = [];
+
+  // move phase calculation outside for loop
+  // only 5 unique values so create its own for loop
+  // credit: https://discussions.udacity.com/t/cant-get-to-60-fps-on-my-machine/35319/3
+  for (var i = 0; i < 5; i++) {
+    phase.push(Math.sin(scrollPos + i) * 100);
+  }
+
+  for (var j = 0; j < pizzaNum; j++) {
+    items[j].style.left = items[j].basicLeft + phase[j % 5] + 'px';
+  }
+
 }
